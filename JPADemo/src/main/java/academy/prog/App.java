@@ -69,13 +69,7 @@ public class App {
         }
 
 
-
-
-        while (true) {
-            Scanner sc = new Scanner(System.in);
-            System.out.print("Enter account number: ");
-            String input = sc.nextLine();
-        }
+        
 
     }
 
