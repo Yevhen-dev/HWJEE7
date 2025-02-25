@@ -7,8 +7,6 @@ import org.junit.Test;
 import javax.persistence.*;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-
 
 public class UserTest extends BaseTest{
 
@@ -20,10 +18,13 @@ public class UserTest extends BaseTest{
     public void testUserGetUserByName() {
 
         System.out.println("----------------------------------------");
-        String name = "Donald";
-        User user = em.find(User.class, name);
+        Query query = em.createQuery("SELECT u FROM User u");
+        List<User> users = query.getResultList();
 
-        System.out.println(user);
+        for( User u : users ) {
+            System.out.println(u.getName());
+        }
+
 
     }
 
