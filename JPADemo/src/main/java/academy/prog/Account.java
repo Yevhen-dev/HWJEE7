@@ -1,6 +1,7 @@
 package academy.prog;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table( name = "accounts")
@@ -19,9 +20,31 @@ public class Account {
     private String currency;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn( name = "userId")
+    @JoinColumn( name = "user_id")
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn( name = "currency_id")
+    private CurrencyRate cr;
+
+    public CurrencyRate getCr() {
+        return cr;
+    }
+
+    public void setCr(CurrencyRate cr) {
+        this.cr = cr;
+    }
+
+    @OneToMany( fetch = FetchType.EAGER, mappedBy = "account")
+    private Set<Transaction> transactions;
+
+    public Set<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Set<Transaction> transactions) {
+        this.transactions = transactions;
+    }
 
     public Account() {}
 
@@ -64,13 +87,5 @@ public class Account {
         this.user = user;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "accountId=" + accountId +
-                ", amount='" + amount + '\'' +
-                ", currency='" + currency + '\'' +
-                ", user=" + user +
-                '}';
-    }
+
 }

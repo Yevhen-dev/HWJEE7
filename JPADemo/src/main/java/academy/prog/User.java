@@ -2,6 +2,7 @@ package academy.prog;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -18,8 +19,12 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @OneToMany( fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Account> accounts;
+
+    @OneToMany( fetch = FetchType.EAGER, mappedBy = "user")
+    private Set<Account> accounts;
+
+//    @OneToMany( fetch = FetchType.EAGER, mappedBy = "user")
+//    private Set<Transaction> transactions;
 
     public User() {}
     public User(String name, String email) {
@@ -51,21 +56,21 @@ public class User {
         this.email = email;
     }
 
-    public List<Account> getAccounts() {
+    public Set<Account> getAccounts() {
         return accounts;
     }
 
-    public void setAccounts(List<Account> accounts) {
+    public void setAccounts(Set<Account> accounts) {
         this.accounts = accounts;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", accounts=" + accounts +
-                '}';
-    }
+//    public Set<Transaction> getTransactions() {
+//        return transactions;
+//    }
+//
+//    public void setTransactions(Set<Transaction> transactions) {
+//        this.transactions = transactions;
+//    }
+
+
 }
